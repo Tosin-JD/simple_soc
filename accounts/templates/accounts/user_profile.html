@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-5">
+        </div>
+        <div class="col-sm-4 mt-3">
+            <div class="img-responsive">
+                 <img src="{{ user.get_profile_pic }}"
+                     width="300" alt="Profile Picture">
+             </div>
+            <h2>@{{ user.username }}</h2>
+            <h3><em>{{ user.email }}</em></h3>
+            <h4>{{ user.gender }}</h4>
+            <p>{{ user.date_of_birth|date }}</p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

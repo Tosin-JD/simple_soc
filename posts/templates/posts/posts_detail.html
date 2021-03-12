@@ -1,0 +1,43 @@
+{% extends 'posts/posts_base.html' %}
+
+{% block post_content %}
+<div class="row">
+    <div class="col-sm-4">
+        {% include 'posts/_posts.html' %}
+    </div>
+    <div class="col-sm-8">
+        <div class="py-3 px-3">
+            <img src="{{ post.image.url }}" alt="{{ post.title }} image." class="img-fluid">
+            <h2>{{ post.title }}</h2>
+            <time class="text-warning mr-auto">{{ post.created_at }}</time>
+            <p>{{ post.message }}</p>
+        </div>
+       <div class="row">
+           <div class="col-sm-12">
+        {% for item in member_comments %}
+            <div class="col-sm-7">
+            <div class="px-3 py-3 mx-3 my-3 bg-light border rounded">
+                <p>{{ item.text }}</p>
+                {% if user.id == item.author_id %}
+                    <a href="{% url 'posts:edit_comment' pk=item.pk %}"
+                   class="" type="submit">Edit</a>
+                    <a href="{% url 'posts:comment_delete' pk=item.pk %}"
+                   class="text-warning" type="submit">Delete</a>
+                {% endif %}
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+    <form action="{% url 'posts:create_comment' post.pk %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="text" placeholder="Type in your comment here">
+        <input class="btn btn-primary" type="submit" value="Comment">
+    </form>
+</div>
+       </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

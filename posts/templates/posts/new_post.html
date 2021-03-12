@@ -1,0 +1,30 @@
+{% extends 'posts/posts_base.html' %}
+
+{% block pre_post %}
+<h2>Create a post</h2>
+{% endblock %}
+
+{% block post_content %}
+<div class="">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <div class="mx-3 my-3 px-3 py-3 bg-light border rounded shadow">
+                    <div class="form-group">
+                        {% for item in form %}
+                           <label>{{ item.label_tag }}</label>
+                            {{ item }}
+                        {% endfor %}
+                    </div>
+                    <input class="btn btn-primary px-4 mx-3 my-3" type="submit" value="Post">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+        
+    </div>
+    
+</div>
+{% endblock %}

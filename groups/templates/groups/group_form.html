@@ -1,0 +1,15 @@
+{% extends 'groups/group_base.html' %}
+
+{% block content %}
+<h4>Create a group!</h4>
+
+<form action="{% url 'groups:create' %}" method="POST">
+    {% csrf_token %}
+    {% for item in form %}
+    <label>{{ item.label_tag }}</label>
+    <p>{{ item }}</p>
+    {% endfor %}
+    <input type="submit" class="btn btn-primary" value="Create">
+</form>
+
+{% endblock %}

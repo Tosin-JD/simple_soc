@@ -1,0 +1,25 @@
+<div class="media my-2 mx-2 py-2 px-2 bg-light">
+    <h6 class="media-heading">
+        <span class="username">
+            <a href="{% url 'posts:for_user' username=post.user.username %}">
+                {{ post.user.username }}
+            </a>
+        </span>
+        <br>
+        <div>
+            <a href="{% url 'posts:each' pk=post.pk %}">Detail</a>
+        </div>
+        <time class="time">
+            <a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">
+                {{ post.created_at|date }}
+            </a>
+        </time>
+    </h5>
+    <div class="media-footer">
+        {% if  user.is_authenticated and post.user == user and not hide_delete %}
+            <a href="{% url 'posts:delete' pk=post.pk %}" class="btn btn-danger">
+                Delete
+            </a>
+        {% endif %}
+    </div>
+</div>

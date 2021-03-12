@@ -1,0 +1,57 @@
+{% extends 'posts/posts_base.html' %}
+
+{% block pre_post %}
+<div class="col-md-8 col-sm-8 col-xs-8 my-3">
+    {% if request.user.is_authenticated %}
+    <div class="card shadow  mx-2 my-2 px-3 py-3">
+        <div class="content">
+            <h5 class="title">Your Groups</h5>
+            <ul class="list-unstyled">
+                {% for member_group in get_user_groups %}
+                    <li class="li-with-bullet">
+                        <a href="{% url 'groups:single' slug=member_group.slug %}">
+                            {{ member_group.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+    <div class="card shadow mx-2 my-2 px-3 py-3">
+        <div class="content">
+            <h5 class="title">All Groups</h5>
+            <ul class="list-unstyled">
+                {# {% get_other_groups as other_groups %} #}
+                {% for other_group in get_other_groups %}
+                <li class="list-with-bullet">
+                    <a href="{% url 'groups:single' slug=other_group.slug %}">
+                        {{ other_group }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        {% for post in post_list %}
+        <div class="col-sm-4">
+               <div class="card">
+                   <img src="{{ post.image.url }}" alt="post image" height="100" class="card-img-top">
+                   <div class="card-body">
+                       <h3 class="card-title">{{ post.title }}</h3>
+                   </div>
+               </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>  
+{% endblock %}
+
+{% block post_content %}
+<div class="col-md-4 col-sm-4 col-xs-4">
+    {% for post in post_list %}
+        {% include 'posts/_posts.html' %}
+    {% endfor %}
+</div>
+{% endblock %}
